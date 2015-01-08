@@ -133,7 +133,7 @@
             <dependency>  
                 <groupId>com.sun</groupId>  
                 <artifactId>tools</artifactId>  
-                <version>1.6.0</version>  
+                <version>1.7.0</version>  
                 <scope>system</scope>  
                 <systemPath>${env.JAVA_HOME}/lib/tools.jar</systemPath>  
             </dependency>  
@@ -145,6 +145,7 @@
     	<module>tocol-server</module>
     	<module>tocol-client</module>
     	<module>tocol-demo</module>
+    	<module>tocol-all</module>
     </modules>  
     
     
