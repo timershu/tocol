@@ -7,8 +7,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import tocol.rpc.common.BeanTocol;
 import tocol.rpc.common.conf.ConfProperties;
-import tocol.rpc.common.conf.Constants;
 import tocol.rpc.common.conf.Services;
+import tocol.rpc.protocol.params.Constants;
 import tocol.rpc.server.Server;
 import tocol.rpc.server.mina.MinaServer;
 import tocol.rpc.server.netty.NettyServer;

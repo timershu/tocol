@@ -1,10 +1,10 @@
 package tocol.rpc.server.netty.handle;
 
 import io.netty.channel.Channel;
-import tocol.rpc.common.conf.Constants;
 import tocol.rpc.common.handle.AbstractReceivedHandle;
 import tocol.rpc.common.handle.SendHandle;
 import tocol.rpc.protocol.Protocol;
+import tocol.rpc.protocol.params.Constants;
 import tocol.rpc.protocol.params.RequestParams;
 import tocol.rpc.protocol.params.ResponseParams;
 import tocol.rpc.server.invoker.InvokerResult;
@@ -16,7 +16,6 @@ public class ServerReceivedHandle extends AbstractReceivedHandle {
 	@Override
 	public void receivedObject(Channel channel, Object obj) {
 		// TODO Auto-generated method stub
-		System.out.println(obj);
 		if (obj instanceof RequestParams) {
 			RequestParams request = (RequestParams) obj;
 			ResponseParams response = new ResponseParams(request.getId());

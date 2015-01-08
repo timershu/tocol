@@ -5,7 +5,6 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import tocol.rpc.common.channel.ChannelManager;
-import tocol.rpc.common.conf.Constants;
 import tocol.rpc.common.handle.ReceivedHandle;
 import tocol.rpc.server.Server;
 import tocol.rpc.server.conf.ChannelManagerSingle;
@@ -25,7 +24,6 @@ public class ServerHandlerAdapter extends ChannelInboundHandlerAdapter {
 	@Override
 	public void userEventTriggered(ChannelHandlerContext ctx, Object evt)
 			throws Exception {
-		System.out.println(Constants.MessageTypeHeartbeat+"\t"+evt);
 		 /*心跳处理*/
         if (evt instanceof IdleStateEvent) {
             IdleStateEvent event = (IdleStateEvent) evt;

@@ -1,6 +1,7 @@
 package tocol.rpc.client.netty;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
@@ -13,11 +14,11 @@ import tocol.rpc.client.Client;
 import tocol.rpc.client.conf.ChannelManagerClientSingle;
 import tocol.rpc.client.netty.handle.ClientReceivedHandle;
 import tocol.rpc.common.channel.ChannelManager;
-import tocol.rpc.common.conf.Constants;
 import tocol.rpc.common.conf.Hosts;
 import tocol.rpc.common.handle.ReceivedHandle;
 import tocol.rpc.protocol.NettyProtocol;
 import tocol.rpc.protocol.Protocol;
+import tocol.rpc.protocol.params.Constants;
 
 public class NettyClient implements Client {
 
@@ -27,7 +28,7 @@ public class NettyClient implements Client {
 	private EventLoopGroup group = null;
 	private Bootstrap b = null;
 	private Channel nowChannel = null;
-	private Protocol protocol;
+	private Protocol<ByteBuf> protocol;
 
 	public NettyClient(Hosts host) {
 		super();

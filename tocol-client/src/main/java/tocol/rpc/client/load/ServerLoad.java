@@ -7,8 +7,8 @@ import tocol.rpc.client.heart.HeartClient;
 import tocol.rpc.client.mina.MinaClient;
 import tocol.rpc.client.netty.NettyClient;
 import tocol.rpc.common.conf.ConfProperties;
-import tocol.rpc.common.conf.Constants;
 import tocol.rpc.common.conf.Hosts;
+import tocol.rpc.protocol.params.Constants;
 
 /**
  * 连接初始化

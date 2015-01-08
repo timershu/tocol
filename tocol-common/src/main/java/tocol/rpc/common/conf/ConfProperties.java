@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import tocol.rpc.protocol.Protocol;
 import tocol.rpc.protocol.ProtocolManager;
+import tocol.rpc.protocol.params.Constants;
 
 public abstract class ConfProperties {
 

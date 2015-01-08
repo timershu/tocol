@@ -1,5 +1,6 @@
 package tocol.rpc.server.netty;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -13,10 +14,10 @@ import tocol.rpc.server.Server;
 public class ServerChannelPipelineFactory extends
 		ChannelInitializer<SocketChannel> {
 	private final ReceivedHandle receivedHandle;
-	private final Protocol protocol;
+	private final Protocol<ByteBuf> protocol;
     private final Server server;
 	private final String hostName;
-	public ServerChannelPipelineFactory(Server server,ReceivedHandle receivedHandle,Protocol protocol,String hostName) {
+	public ServerChannelPipelineFactory(Server server,ReceivedHandle receivedHandle,Protocol<ByteBuf> protocol,String hostName) {
 		super();
 		this.server=server;
 		this.receivedHandle = receivedHandle;

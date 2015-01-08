@@ -4,7 +4,7 @@ import java.util.List;
 
 import tocol.rpc.client.conf.ChannelManagerClientSingle;
 import tocol.rpc.common.channel.ChannelManager;
-import tocol.rpc.common.conf.Constants;
+import tocol.rpc.protocol.params.Constants;
 import tocol.rpc.protocol.params.RequestParams;
 
 /**

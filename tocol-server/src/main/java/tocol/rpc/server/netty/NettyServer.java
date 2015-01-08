@@ -1,6 +1,7 @@
 package tocol.rpc.server.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -26,7 +27,7 @@ public class NettyServer implements Server {
 	private EventLoopGroup workerGroup = null;
 	private ServerBootstrap b = null;
 	private SendHandle sendHandle;
-	private Protocol protocol;
+	private Protocol<ByteBuf> protocol;
 
 	private String hostName;
 	public NettyServer(int port) {
