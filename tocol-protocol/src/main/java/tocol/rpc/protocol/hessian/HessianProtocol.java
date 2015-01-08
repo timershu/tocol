@@ -10,7 +10,7 @@ import com.caucho.hessian.io.Deflation;
 import com.caucho.hessian.io.Hessian2Input;
 import com.caucho.hessian.io.Hessian2Output;
 
-public class HessianProtocol implements Protocol {
+public class HessianProtocol implements Protocol<ByteBuf> {
 	
 	private final static String protocolName="hessian";
 

@@ -3,7 +3,7 @@ package tocol.rpc.protocol.java;
 import io.netty.buffer.ByteBuf;
 import tocol.rpc.protocol.Protocol;
 
-public class JavaProtocol implements Protocol {
+public class JavaProtocol implements Protocol<ByteBuf> {
 	private final static String protocolName="java";
 	
 	public void encoder(ByteBuf arg0, Object arg1) {

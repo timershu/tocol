@@ -16,8 +16,8 @@ import tocol.rpc.common.channel.ChannelManager;
 import tocol.rpc.common.conf.Constants;
 import tocol.rpc.common.conf.Hosts;
 import tocol.rpc.common.handle.ReceivedHandle;
+import tocol.rpc.protocol.NettyProtocol;
 import tocol.rpc.protocol.Protocol;
-import tocol.rpc.protocol.ProtocolCommon;
 
 public class NettyClient implements Client {
 
@@ -33,7 +33,7 @@ public class NettyClient implements Client {
 		super();
 		this.host = host;
 		this.hostName = host.getHost() + ":" + host.getPort();
-		protocol = new ProtocolCommon();
+		protocol = new NettyProtocol();
 		receivedHandle = new ClientReceivedHandle(protocol);
 		group = new NioEventLoopGroup();
 

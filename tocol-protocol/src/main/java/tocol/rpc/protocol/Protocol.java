@@ -8,7 +8,7 @@ import io.netty.buffer.ByteBuf;
  * @author Administrator
  * 
  */
-public interface Protocol {
+public interface Protocol<T> {
 
 	/**
 	 * 
@@ -16,7 +16,7 @@ public interface Protocol {
 	 * @param arg1
 	 * @throws Exception
 	 */
-	public void encoder(ByteBuf arg0, Object arg1) throws Exception;
+	public void encoder(T arg0, Object arg1) throws Exception;
 
 	/**
 	 * 
@@ -25,5 +25,5 @@ public interface Protocol {
 	 * @return
 	 * @throws Exception
 	 */
-	public Object decoder(ByteBuf arg0) throws Exception;
+	public Object decoder(T arg0) throws Exception;
 }

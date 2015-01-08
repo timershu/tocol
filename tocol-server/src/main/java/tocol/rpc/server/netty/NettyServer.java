@@ -1,18 +1,19 @@
 package tocol.rpc.server.netty;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import tocol.rpc.common.handle.ReceivedHandle;
 import tocol.rpc.common.handle.SendHandle;
+import tocol.rpc.protocol.NettyProtocol;
 import tocol.rpc.protocol.Protocol;
-import tocol.rpc.protocol.ProtocolCommon;
 import tocol.rpc.server.Server;
 import tocol.rpc.server.netty.handle.ServerReceivedHandle;
 import tocol.rpc.server.netty.handle.ServerSendHandle;
@@ -46,7 +47,7 @@ public class NettyServer implements Server {
 	public void start() {
 		// TODO Auto-generated method stub
 		sendHandle = new ServerSendHandle();
-		protocol = new ProtocolCommon();
+		protocol = new NettyProtocol();
 		receivedHandle = new ServerReceivedHandle(sendHandle, protocol);
 		bossGroup = new NioEventLoopGroup(1);
 		workerGroup = new NioEventLoopGroup();
