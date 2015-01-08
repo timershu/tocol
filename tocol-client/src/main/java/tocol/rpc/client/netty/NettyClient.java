@@ -66,7 +66,16 @@ public class NettyClient implements Client {
 	public void doConnect() {
 		// TODO Auto-generated method stub
 		stop();
-		connect();
+		while(!(nowChannel!=null&&nowChannel.isActive())){
+			connect();
+            try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            System.out.println("无限尝试新连接……");
+		}
 	}
 
 	@Override
