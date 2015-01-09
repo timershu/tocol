@@ -12,9 +12,9 @@ import java.util.concurrent.TimeUnit;
 
 import tocol.rpc.client.Client;
 import tocol.rpc.client.conf.ChannelManagerClientSingle;
+import tocol.rpc.client.load.Hosts;
 import tocol.rpc.client.netty.handle.ClientReceivedHandle;
 import tocol.rpc.common.channel.ChannelManager;
-import tocol.rpc.common.conf.Hosts;
 import tocol.rpc.protocol.NettyProtocol;
 import tocol.rpc.protocol.Protocol;
 import tocol.rpc.protocol.handle.ReceivedHandle;

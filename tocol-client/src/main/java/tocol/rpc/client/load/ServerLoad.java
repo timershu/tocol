@@ -3,11 +3,10 @@ package tocol.rpc.client.load;
 import java.util.List;
 
 import tocol.rpc.client.Client;
+import tocol.rpc.client.conf.ClientConfProperties;
 import tocol.rpc.client.heart.HeartClient;
 import tocol.rpc.client.mina.MinaClient;
 import tocol.rpc.client.netty.NettyClient;
-import tocol.rpc.common.conf.ConfProperties;
-import tocol.rpc.common.conf.Hosts;
 import tocol.rpc.protocol.params.Constants;
 
 /**
@@ -19,7 +18,7 @@ import tocol.rpc.protocol.params.Constants;
 public class ServerLoad {
 
 	static {
-		ServerLoad.init(ConfProperties.getHostsList());
+		ServerLoad.init(ClientConfProperties.getHostsList());
 		HeartClient.main(null);
 	}
 

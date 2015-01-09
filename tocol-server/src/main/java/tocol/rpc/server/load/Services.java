@@ -1,4 +1,4 @@
-package tocol.rpc.common.conf;
+package tocol.rpc.server.load;
 
 import java.util.List;
 import java.util.Map;

@@ -5,11 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
 
 import tocol.rpc.protocol.Protocol;
 import tocol.rpc.protocol.ProtocolManager;
@@ -17,21 +15,16 @@ import tocol.rpc.protocol.params.Constants;
 
 public abstract class ConfProperties {
 
-	private static List<Hosts> hostsList = null;
+	public static Map<String, Properties> getMapProperties() {
+		return mapProperties;
+	}
 
-	private static Services services = null;
+	private static Map<String, Properties> mapProperties=new ConcurrentHashMap<String, Properties>();
 
 	static {
 		init();
 	}
 
-	public static List<Hosts> getHostsList() {
-		return hostsList;
-	}
-
-	public static Services getServices() {
-		return services;
-	}
 
 	public static void init() {
 
@@ -63,7 +56,7 @@ public abstract class ConfProperties {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				initClient(io);
+				initClient(Constants.clientConfName,io);
 			} else if (Constants.serverConfName.equals(listFiles[i].getName())) {
 				try {
 					io = new FileInputStream(listFiles[i]);
@@ -71,7 +64,7 @@ public abstract class ConfProperties {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				initServer(io);
+				initServer(Constants.serverConfName,io);
 			}
 		}
 
@@ -96,34 +89,12 @@ public abstract class ConfProperties {
 	 * 
 	 * @param io
 	 */
-	private static void initClient(InputStream io) {
+	private static void initClient(String key,InputStream io) {
 		Properties p = new Properties();
 		try {
 			p.load(io);
-			hostsList = new ArrayList<>();
-			Object o=p.get(Constants.serverName);
-			if(o==null){
-				o=Constants.nettyServer;
-			}
-			for (String key : p.stringPropertyNames()) {
-				if (key.startsWith(Constants.clientServerPrefix) && key.endsWith(Constants.clientServerSuffix)) {
-					Object value = p.get(key);
-					Hosts host = null;
-					String[] values = value.toString().split(":");
-					if (values.length == 1) {
-						host = new Hosts(values[0],80);
-						host.setConnectionCount(1);
-					} else if (values.length == 2){
-						host = new Hosts(values[0],Integer.parseInt(values[1]));
-						host.setConnectionCount(1);
-					}else{
-						host = new Hosts(values[0],Integer.parseInt(values[1]));
-						host.setConnectionCount(Integer.parseInt(values[2]));
-					}
-					host.setServerName(o.toString());
-					hostsList.add(host);
-				}
-			}
+			mapProperties.put(key, p);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -135,38 +106,14 @@ public abstract class ConfProperties {
 	 * 
 	 * @param io
 	 */
-	private static void initServer(InputStream io) {
+	private static void initServer(String key,InputStream io) {
 		Properties p = new Properties();
 		try {
 			p.load(io);
-			services = new Services();
-			Map<String, String> maps = new HashMap<>();
-			List<Integer> portList=new ArrayList<>();
-			for (String key : p.stringPropertyNames()) {
-				if (key.startsWith(Constants.serverServicePrefix) && key.endsWith(Constants.serverServiceSuffix)) {
-					Object value = p.get(key);
-					String[] values = value.toString().split(":");
-					maps.put(values[0], values[1]);
-				}else if(key.startsWith(Constants.serverPortPrefix) && key.endsWith(Constants.serverPortSuffix)){
-					Object value = p.get(key);
-					portList.add(Integer.valueOf(value.toString()));
-				}
-			}
-			Object o=p.get(Constants.serverName);
-			if(o==null){
-				o=Constants.nettyServer;
-			}
-			services.setServerName(o.toString());
-			services.setServiceMaps(maps);
-			services.setPort(portList);
+			mapProperties.put(key, p);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	public static void main(String[] args) {
-		System.out.println(services);
-		System.out.println(hostsList);
 	}
 }

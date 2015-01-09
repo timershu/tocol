@@ -1,7 +1,7 @@
 package tocol.rpc.client.mina;
 
 import tocol.rpc.client.Client;
-import tocol.rpc.common.conf.Hosts;
+import tocol.rpc.client.load.Hosts;
 
 public class MinaClient implements Client {
 	

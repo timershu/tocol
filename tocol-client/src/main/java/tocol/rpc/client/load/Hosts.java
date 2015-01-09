@@ -1,4 +1,4 @@
-package tocol.rpc.common.conf;
+package tocol.rpc.client.load;
 
 public class Hosts {
 
