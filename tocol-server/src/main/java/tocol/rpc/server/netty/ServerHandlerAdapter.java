@@ -1,20 +1,21 @@
 package tocol.rpc.server.netty;
 
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import tocol.rpc.common.channel.ChannelManager;
-import tocol.rpc.common.handle.ReceivedHandle;
+import tocol.rpc.protocol.handle.ReceivedHandle;
 import tocol.rpc.server.Server;
 import tocol.rpc.server.conf.ChannelManagerSingle;
 
 public class ServerHandlerAdapter extends ChannelInboundHandlerAdapter {
 
-	private final ReceivedHandle receivedHandle;
+	private final ReceivedHandle<Channel> receivedHandle;
 	private final String hostName;
 	private final Server server;
-	public ServerHandlerAdapter(Server server,ReceivedHandle receivedHandle,String hostName) {
+	public ServerHandlerAdapter(Server server,ReceivedHandle<Channel> receivedHandle,String hostName) {
 		super();
 		this.server=server;
 		this.receivedHandle = receivedHandle;

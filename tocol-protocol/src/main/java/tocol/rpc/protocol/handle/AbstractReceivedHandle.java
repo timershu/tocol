@@ -1,10 +1,9 @@
-package tocol.rpc.common.handle;
+package tocol.rpc.protocol.handle;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.channel.Channel;
 import tocol.rpc.protocol.Protocol;
 
-public abstract class AbstractReceivedHandle implements ReceivedHandle {
+public abstract class AbstractReceivedHandle<T> implements ReceivedHandle<T> {
 
 	protected final Protocol protocol;
 
@@ -13,10 +12,10 @@ public abstract class AbstractReceivedHandle implements ReceivedHandle {
 		this.protocol = protocol;
 	}
 
-	public abstract void receivedObject(Channel channel, Object obj);
+	public abstract void receivedObject(T channel, Object obj);
 
 	@Override
-	public Object received(Channel channel, Object obj) {
+	public Object received(T channel, Object obj) {
 		Object o = null;
 		if (obj instanceof ByteBuf) {
 			try {

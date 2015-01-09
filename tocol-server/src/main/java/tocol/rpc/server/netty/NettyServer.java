@@ -2,6 +2,7 @@ package tocol.rpc.server.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
+import io.netty.channel.Channel;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -11,10 +12,10 @@ import io.netty.handler.logging.LoggingHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import tocol.rpc.common.handle.ReceivedHandle;
-import tocol.rpc.common.handle.SendHandle;
 import tocol.rpc.protocol.NettyProtocol;
 import tocol.rpc.protocol.Protocol;
+import tocol.rpc.protocol.handle.ReceivedHandle;
+import tocol.rpc.protocol.handle.SendHandle;
 import tocol.rpc.server.Server;
 import tocol.rpc.server.netty.handle.ServerReceivedHandle;
 import tocol.rpc.server.netty.handle.ServerSendHandle;
@@ -26,7 +27,7 @@ public class NettyServer implements Server {
 	private EventLoopGroup bossGroup = null;
 	private EventLoopGroup workerGroup = null;
 	private ServerBootstrap b = null;
-	private SendHandle sendHandle;
+	private SendHandle<Channel> sendHandle;
 	private Protocol<ByteBuf> protocol;
 
 	private String hostName;
@@ -36,7 +37,7 @@ public class NettyServer implements Server {
 		this.hostName=String.valueOf(port);
 	}
 
-	private ReceivedHandle receivedHandle;
+	private ReceivedHandle<Channel> receivedHandle;
 
 	public static void main(String[] args) {
 		int PORT = 8081;

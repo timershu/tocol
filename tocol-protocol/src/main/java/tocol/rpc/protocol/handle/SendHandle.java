@@ -1,4 +1,4 @@
-package tocol.rpc.common.handle;
+package tocol.rpc.protocol.handle;
 
 import io.netty.channel.Channel;
 
@@ -8,7 +8,7 @@ import io.netty.channel.Channel;
  * @author Administrator
  * 
  */
-public interface SendHandle {
+public interface SendHandle<T> {
 
 	/**
 	 * 发送数据
@@ -16,6 +16,6 @@ public interface SendHandle {
 	 * @param channel
 	 * @param obj
 	 */
-	public void send(Channel channel, Object obj);
+	public void send(T channel, Object obj);
 
 }

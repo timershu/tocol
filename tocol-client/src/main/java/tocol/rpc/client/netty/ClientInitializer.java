@@ -1,21 +1,22 @@
 package tocol.rpc.client.netty;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
 import io.netty.handler.timeout.IdleStateHandler;
-import tocol.rpc.common.handle.ReceivedHandle;
 import tocol.rpc.protocol.Protocol;
+import tocol.rpc.protocol.handle.ReceivedHandle;
 
 public class ClientInitializer extends ChannelInitializer<SocketChannel> {
 	private final String hostName;
-	private final ReceivedHandle receivedHandle;
+	private final ReceivedHandle<Channel> receivedHandle;
 	private final Protocol<ByteBuf> protocol;
 
-	public ClientInitializer(String hostName, ReceivedHandle receivedHandle,
+	public ClientInitializer(String hostName, ReceivedHandle<Channel> receivedHandle,
 			Protocol<ByteBuf> protocol) {
 		super();
 		this.hostName = hostName;

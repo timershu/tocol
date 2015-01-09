@@ -1,4 +1,4 @@
-package tocol.rpc.common.handle;
+package tocol.rpc.protocol.handle;
 
 import io.netty.channel.Channel;
 
@@ -8,7 +8,7 @@ import io.netty.channel.Channel;
  * @author Administrator
  * 
  */
-public interface ReceivedHandle {
+public interface ReceivedHandle<T> {
 
 	/**
 	 * 接收数据
@@ -16,6 +16,6 @@ public interface ReceivedHandle {
 	 * @param channel
 	 * @param obj
 	 */
-	public Object received(Channel channel, Object obj);
+	public Object received(T channel, Object obj);
 
 }

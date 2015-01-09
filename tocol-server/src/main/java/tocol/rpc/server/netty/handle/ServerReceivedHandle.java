@@ -1,17 +1,17 @@
 package tocol.rpc.server.netty.handle;
 
 import io.netty.channel.Channel;
-import tocol.rpc.common.handle.AbstractReceivedHandle;
-import tocol.rpc.common.handle.SendHandle;
 import tocol.rpc.protocol.Protocol;
+import tocol.rpc.protocol.handle.AbstractReceivedHandle;
+import tocol.rpc.protocol.handle.SendHandle;
 import tocol.rpc.protocol.params.Constants;
 import tocol.rpc.protocol.params.RequestParams;
 import tocol.rpc.protocol.params.ResponseParams;
 import tocol.rpc.server.invoker.InvokerResult;
 
-public class ServerReceivedHandle extends AbstractReceivedHandle {
+public class ServerReceivedHandle extends AbstractReceivedHandle<Channel> {
 
-	private final SendHandle sendHandle;
+	private final SendHandle<Channel> sendHandle;
 
 	@Override
 	public void receivedObject(Channel channel, Object obj) {

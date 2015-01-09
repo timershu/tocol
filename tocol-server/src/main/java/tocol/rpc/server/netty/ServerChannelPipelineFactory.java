@@ -1,23 +1,24 @@
 package tocol.rpc.server.netty;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
 import io.netty.handler.timeout.IdleStateHandler;
-import tocol.rpc.common.handle.ReceivedHandle;
 import tocol.rpc.protocol.Protocol;
+import tocol.rpc.protocol.handle.ReceivedHandle;
 import tocol.rpc.server.Server;
 
 public class ServerChannelPipelineFactory extends
 		ChannelInitializer<SocketChannel> {
-	private final ReceivedHandle receivedHandle;
+	private final ReceivedHandle<Channel> receivedHandle;
 	private final Protocol<ByteBuf> protocol;
     private final Server server;
 	private final String hostName;
-	public ServerChannelPipelineFactory(Server server,ReceivedHandle receivedHandle,Protocol<ByteBuf> protocol,String hostName) {
+	public ServerChannelPipelineFactory(Server server,ReceivedHandle<Channel> receivedHandle,Protocol<ByteBuf> protocol,String hostName) {
 		super();
 		this.server=server;
 		this.receivedHandle = receivedHandle;
