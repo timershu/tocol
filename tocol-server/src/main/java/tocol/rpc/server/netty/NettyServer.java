@@ -9,18 +9,24 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import tocol.rpc.common.channel.ChannelManager;
 import tocol.rpc.protocol.NettyProtocol;
 import tocol.rpc.protocol.Protocol;
 import tocol.rpc.protocol.handle.ReceivedHandle;
 import tocol.rpc.protocol.handle.SendHandle;
+import tocol.rpc.server.AbstractServer;
 import tocol.rpc.server.Server;
+import tocol.rpc.server.conf.ChannelManagerSingle;
 import tocol.rpc.server.netty.handle.ServerReceivedHandle;
 import tocol.rpc.server.netty.handle.ServerSendHandle;
 
-public class NettyServer implements Server {
+public class NettyServer extends AbstractServer{
 	
 	private static Logger log=LoggerFactory.getLogger(NettyServer.class);
 	private int port = 8081;
@@ -72,6 +78,15 @@ public class NettyServer implements Server {
 	@Override
 	public void stop() {
 		// TODO Auto-generated method stub
+		Map<String, List<ChannelManager>> maps=ChannelManagerSingle.getChannelManagerMap();
+		for(String key:maps.keySet()){
+			try {
+				ChannelManagerSingle.close(key);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		bossGroup.shutdownGracefully();
 		workerGroup.shutdownGracefully();
 	}

@@ -10,7 +10,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 
 import java.util.concurrent.TimeUnit;
 
-import tocol.rpc.client.Client;
+import tocol.rpc.client.AbstractClient;
 import tocol.rpc.client.conf.ChannelManagerClientSingle;
 import tocol.rpc.client.load.Hosts;
 import tocol.rpc.client.netty.handle.ClientReceivedHandle;
@@ -20,7 +20,7 @@ import tocol.rpc.protocol.Protocol;
 import tocol.rpc.protocol.handle.ReceivedHandle;
 import tocol.rpc.protocol.params.Constants;
 
-public class NettyClient implements Client {
+public class NettyClient extends AbstractClient {
 
     private final Hosts host;
 	private String hostName;
@@ -65,8 +65,7 @@ public class NettyClient implements Client {
 	@Override
 	public void doConnect() {
 		// TODO Auto-generated method stub
-		stop();
-		while(!(nowChannel!=null&&nowChannel.isActive())){
+		while(!(nowChannel.isActive())){
 			connect();
             try {
 				Thread.sleep(10000);
@@ -83,6 +82,7 @@ public class NettyClient implements Client {
 		// TODO Auto-generated method stub
 		System.out.println("开始断开");
 		if(nowChannel!=null){
+			group.shutdownGracefully();
 			nowChannel.close();
 			nowChannel=null;
 		}

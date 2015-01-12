@@ -87,6 +87,13 @@ public class ChannelManagerSingle {
 				remove(l);
 			}
 		}
+		
+		private static synchronized void close(String key) {
+			List<ChannelManager> lists = ChannelManagerMapList.get(key);
+			for(ChannelManager l:lists){
+				l.getChannel().close();
+			}
+		}
 	}
 
 	public static void put(String key, ChannelManager value) {
@@ -95,6 +102,10 @@ public class ChannelManagerSingle {
 
 	public static ChannelManager get(String key) throws Exception {
 		return ChannelManagerMap.get(key);
+	}
+	
+	public static void close(String key) throws Exception {
+		close(key);
 	}
 
 	public static Map<String, List<ChannelManager>> getChannelManagerMap() {
