@@ -105,7 +105,7 @@ public class ChannelManagerSingle {
 	}
 	
 	public static void close(String key) throws Exception {
-		close(key);
+		ChannelManagerMap.close(key);
 	}
 
 	public static Map<String, List<ChannelManager>> getChannelManagerMap() {
