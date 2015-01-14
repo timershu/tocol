@@ -8,7 +8,7 @@ import io.netty.handler.timeout.IdleStateEvent;
 import tocol.rpc.common.channel.ChannelManager;
 import tocol.rpc.protocol.handle.ReceivedHandle;
 import tocol.rpc.server.Server;
-import tocol.rpc.server.conf.ChannelManagerSingle;
+import tocol.rpc.server.conf.ChannelManagerServerSingle;
 
 public class ServerHandlerAdapter extends ChannelInboundHandlerAdapter {
 
@@ -30,8 +30,8 @@ public class ServerHandlerAdapter extends ChannelInboundHandlerAdapter {
             IdleStateEvent event = (IdleStateEvent) evt;
             if (event.state() == IdleState.READER_IDLE) {
                 /*读超时*/
-        		System.out.println("读超时:"+ctx.channel()+"\t"+ChannelManagerSingle.getChannelManagerMap().get(hostName).size());
-                ChannelManagerSingle.remove(hostName,ctx.channel());
+        		System.out.println("读超时:"+ctx.channel()+"\t"+ChannelManagerServerSingle.getChannelManagerMap().get(hostName).size());
+                ChannelManagerServerSingle.remove(hostName,ctx.channel());
             } else if (event.state() == IdleState.WRITER_IDLE) {
                 /*写超时*/   
                 System.out.println("WRITER_IDLE 写超时");
@@ -47,7 +47,7 @@ public class ServerHandlerAdapter extends ChannelInboundHandlerAdapter {
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
 		// TODO Auto-generated method stub
 		ChannelManager manager=new ServerChannelManager(server,ctx.channel(), hostName);
-		ChannelManagerSingle.put(hostName,manager);
+		ChannelManagerServerSingle.put(hostName,manager);
 
 	}
 
@@ -67,8 +67,8 @@ public class ServerHandlerAdapter extends ChannelInboundHandlerAdapter {
 		// Close the connection when an exception is raised.
 		cause.printStackTrace();
 		ctx.close();
-		ChannelManagerSingle.remove(hostName,ctx.channel());
-		System.out.println("断开连接:"+ctx.channel()+"\t"+ChannelManagerSingle.getChannelManagerMap().get(hostName).size());
+		ChannelManagerServerSingle.remove(hostName,ctx.channel());
+		System.out.println("断开连接:"+ctx.channel()+"\t"+ChannelManagerServerSingle.getChannelManagerMap().get(hostName).size());
 
 	}
 }

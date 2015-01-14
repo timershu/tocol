@@ -10,9 +10,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import tocol.rpc.common.channel.ChannelManager;
 import tocol.rpc.server.netty.ServerChannelManager;
 
-public class ChannelManagerSingle {
+public class ChannelManagerServerSingle {
 
-	private ChannelManagerSingle() {
+	private ChannelManagerServerSingle() {
 	}
 
 	private static class ChannelManagerMap {

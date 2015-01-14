@@ -22,7 +22,7 @@ import tocol.rpc.protocol.handle.ReceivedHandle;
 import tocol.rpc.protocol.handle.SendHandle;
 import tocol.rpc.server.AbstractServer;
 import tocol.rpc.server.Server;
-import tocol.rpc.server.conf.ChannelManagerSingle;
+import tocol.rpc.server.conf.ChannelManagerServerSingle;
 import tocol.rpc.server.netty.handle.ServerReceivedHandle;
 import tocol.rpc.server.netty.handle.ServerSendHandle;
 
@@ -78,10 +78,10 @@ public class NettyServer extends AbstractServer{
 	@Override
 	public void stop() {
 		// TODO Auto-generated method stub
-		Map<String, List<ChannelManager>> maps=ChannelManagerSingle.getChannelManagerMap();
+		Map<String, List<ChannelManager>> maps=ChannelManagerServerSingle.getChannelManagerMap();
 		for(String key:maps.keySet()){
 			try {
-				ChannelManagerSingle.close(key);
+				ChannelManagerServerSingle.close(key);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
