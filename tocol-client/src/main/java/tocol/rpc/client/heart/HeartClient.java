@@ -16,6 +16,10 @@ public class HeartClient {
 				heartbeat, heartbeatTimeout, TimeUnit.SECONDS);
 	}
 
+	public static void stop(){
+		scheduled.shutdown();
+	}
+	
 	public static void main(String args[]) {
 	}
 

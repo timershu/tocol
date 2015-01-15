@@ -92,6 +92,17 @@ public class ChannelManagerClientSingle {
 				remove(l);
 			}
 		}
+		
+		private static void close(String key) {
+			List<ChannelManager> lists = ChannelManagerMapList.get(key);
+			for(ChannelManager l:lists){
+				l.getChannel().close();
+			}
+		}
+	}
+	
+	public static void close(String key) {
+		ChannelManagerMap.close(key);
 	}
 
 	public static void put(String key, ChannelManager value) {

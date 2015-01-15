@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import tocol.rpc.common.channel.ChannelManager;
 import tocol.rpc.common.conf.ConfProperties;
 import tocol.rpc.protocol.params.Constants;
 import tocol.rpc.server.load.Services;
@@ -14,6 +18,8 @@ public class ServerConfProperties extends ConfProperties {
 
 
 	private static Services services = null;
+	
+	private static Logger logger=LoggerFactory.getLogger(ServerConfProperties.class);
 
 	static {
 		init();
@@ -65,4 +71,22 @@ public class ServerConfProperties extends ConfProperties {
 			e.printStackTrace();
 		}
 	}
+	
+	 static {
+	        Runtime.getRuntime().addShutdownHook(new Thread(){
+	            @Override
+	            public void run() {
+	            	logger.info("JVM is shutting down... Stop");
+	            	Map<String, List<ChannelManager>> maps=ChannelManagerServerSingle.getChannelManagerMap();
+	            	for(String key:maps.keySet()){
+	            		try {
+							ChannelManagerServerSingle.close(key);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+	            	}
+	            }
+	        });
+	    }
 }
