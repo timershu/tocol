@@ -17,13 +17,13 @@ public class ChannelManagerServerSingle {
 
 	private static class ChannelManagerMap {
 
-		private static Map<String, List<ChannelManager>> ChannelManagerMapList=new ConcurrentHashMap<>();
+		private static Map<String, List<ChannelManager>> ChannelManagerMapList=new ConcurrentHashMap<String, List<ChannelManager>>();
 		
 		public static  void put(String key, ChannelManager value) {
 			synchronized (ChannelManagerMapList) {
 				List<ChannelManager> lists=ChannelManagerMapList.get(key);
 				if(lists==null){
-					lists=new CopyOnWriteArrayList<>();
+					lists=new CopyOnWriteArrayList<ChannelManager>();
 				}
 				lists.add(value);
 				ChannelManagerMapList.put(key, lists);

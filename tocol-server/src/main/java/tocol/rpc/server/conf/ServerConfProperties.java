@@ -47,8 +47,8 @@ public class ServerConfProperties extends ConfProperties {
 	private static void initServer(Properties p) {
 		try {
 			services = new Services();
-			Map<String, String> maps = new HashMap<>();
-			List<Integer> portList=new ArrayList<>();
+			Map<String, String> maps = new HashMap<String, String>();
+			List<Integer> portList=new ArrayList<Integer>();
 			for (String key : p.stringPropertyNames()) {
 				if (key.startsWith(Constants.serverServicePrefix) && key.endsWith(Constants.serverServiceSuffix)) {
 					Object value = p.get(key);

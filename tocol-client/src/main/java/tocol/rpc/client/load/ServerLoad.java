@@ -35,7 +35,7 @@ public class ServerLoad {
 		}
 	}
 	
-	public static Client connection(Hosts host){
+	public static Client connection(Hosts host)throws Exception{
 		Client client = null;
 		try {
 			String serverName=host.getServerName();

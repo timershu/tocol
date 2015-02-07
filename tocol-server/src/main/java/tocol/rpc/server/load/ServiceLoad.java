@@ -21,7 +21,7 @@ public class ServiceLoad {
 
 	private final static Map<String, Method> methodMap = new ConcurrentHashMap<String, Method>();
 
-	private final static Map<String, Object> serviceImplMap = new ConcurrentHashMap<>();
+	private final static Map<String, Object> serviceImplMap = new ConcurrentHashMap<String, Object>();
 
 	private static BeanTocol beanTocol;
 	

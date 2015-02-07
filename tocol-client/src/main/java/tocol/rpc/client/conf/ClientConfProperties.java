@@ -48,7 +48,7 @@ public class ClientConfProperties extends ConfProperties {
 	 */
 	private static void initClient(Properties p) {
 		try {
-			hostsList = new ArrayList<>();
+			hostsList = new ArrayList<Hosts>();
 			Object o=p.get(Constants.serverName);
 			if(o==null){
 				o=Constants.nettyServer;

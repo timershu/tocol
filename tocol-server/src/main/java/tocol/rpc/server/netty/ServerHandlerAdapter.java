@@ -12,6 +12,15 @@ import tocol.rpc.server.conf.ChannelManagerServerSingle;
 
 public class ServerHandlerAdapter extends ChannelInboundHandlerAdapter {
 
+	@Override
+	public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
+		// TODO Auto-generated method stub
+		super.channelUnregistered(ctx);
+		System.out.println("Client disconnect...");
+        ChannelManagerServerSingle.remove(hostName,ctx.channel());
+
+	}
+
 	private final ReceivedHandle<Channel> receivedHandle;
 	private final String hostName;
 	private final Server server;
@@ -53,7 +62,6 @@ public class ServerHandlerAdapter extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
-		System.out.println(ctx.channel()+"\t"+msg);
 		receivedHandle.received(ctx.channel(), msg);
 	}
 

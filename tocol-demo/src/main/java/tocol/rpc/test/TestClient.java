@@ -3,6 +3,7 @@ import hessian.service.Hello;
 import hessian.service.HelloVo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -25,7 +26,9 @@ public class TestClient {
 	public static AtomicLong successLong=new AtomicLong();
 	
 	public static AtomicLong errorLong=new AtomicLong();
+	
 
+	
 	/**
 	 * @param args
 	 * @throws ExecutionException 
@@ -36,7 +39,29 @@ public class TestClient {
 		ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("applicationContext-tocol-client.xml");
 		context.start();
 		test();
-		//testThread();
+		testThread();
+		
+		Map<TestClient, String> maps=new HashMap<TestClient, String>();
+		for(int i=0;i<100;i++){
+			TestClient tc=new TestClient();
+
+			System.out.println(maps.put(tc, i+""));
+		}
+		System.out.println(maps.size());
+	}
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		//System.out.println("obj=="+obj);
+		if(obj instanceof TestClient){
+			return true;
+		}
+		return false;
 	}
 	private static void test() {
 		Factory factory = new ClientFactory();
@@ -58,9 +83,9 @@ public class TestClient {
 	private static void testThread() throws InterruptedException, ExecutionException {
 		long startTime=System.currentTimeMillis();
 		ExecutorService service = Executors.newFixedThreadPool(100);
-		int count=100;
-		int threadsCount=1000;
-		List<Callable<Long>> tasks=new ArrayList<>();
+		int count=10;
+		int threadsCount=10;
+		List<Callable<Long>> tasks=new ArrayList<Callable<Long>>();
 		for (int i = 0; i < threadsCount; i++) {
 			tasks.add(new Task(count));
 			service.submit(new Task(count));
@@ -104,7 +129,7 @@ class Task implements Callable<Long> {
 	public void run() {
 		// TODO Auto-generated method stub
 		Factory factory = new ClientFactory();
-		String url = "10.10.10.166:11111";
+		String url = "127.0.0.1:8081";
 		String params = TestClient.getParams(100);
 		for (int i = 0; i < count; i++) {
 			try {
